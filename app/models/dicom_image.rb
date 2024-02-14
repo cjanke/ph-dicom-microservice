@@ -1,0 +1,2 @@
+class DicomImage < ApplicationRecord
+end
