@@ -1,3 +1,6 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  post '/dicom_images', to: 'dicom_images#create'
+  get '/dicom_images/:id', to: 'dicom_images#show'
+
+  get '/dicom_images/:id/dicom_elements/', to: 'dicom_images#elements'
 end
