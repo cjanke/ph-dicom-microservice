@@ -41,9 +41,14 @@ class DicomImage
     dcm.write(local_filename)
   end
 
-  private
-
   def local_filename
-    IMAGE_DIRECTORY + "/#{id}-#{filename}.dcm"
+    IMAGE_DIRECTORY + "/#{id}-#{filename}"
+  end
+
+  def png
+    png_filename = local_filename + ".png"
+    # TODO: some issue with the Ruby Dicom library and rmagick
+    # dcm.image.normalize.write(png_filename)
+    png_filename
   end
 end

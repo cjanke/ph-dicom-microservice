@@ -12,7 +12,10 @@ class DicomImagesController < ApplicationController
 
   def png
     id = params[:id]
-    dicom_image = DicomImage.load(id)
+    dcm_image = DicomImage.load(id)
+    # TODO: Fix in dicom_image so can enable here
+    # send_file dcm_image.png
+    render plain: "WIP - investigating issue with library and RMagick", status: :ok
   end
 
   def elements
