@@ -4,6 +4,7 @@ class DicomImagesController < ApplicationController
       filename: dicom_image_params[:filename],
     ).set_content_from_string(dicom_image_params[:raw].read)
     dicom_image.save_locally
+    render json: dicom_image, status: :created
   end
 
   def show
