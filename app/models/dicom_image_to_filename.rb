@@ -1,0 +1,2 @@
+class DicomImageToFilename < ApplicationRecord
+end

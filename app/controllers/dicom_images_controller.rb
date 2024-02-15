@@ -1,12 +1,10 @@
 class DicomImagesController < ApplicationController
   def create
-    @dicom_image = DicomImage.new(dicom_image_params)
-
-    if @dicom_image.save
-      render json: @dicom_image, status: :created
-    else
-      render json: {error: 'Dicom image upload failed'}, status: :unprocessable_entity
-    end
+    dicom_image = DicomImage.new(
+      content: dicom_image_params[:raw].read,
+      filename: dicom_image_params[:filename],
+    )
+    dicom_image.save_locally
   end
 
   def show
