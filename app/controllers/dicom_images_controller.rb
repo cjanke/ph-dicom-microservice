@@ -19,6 +19,11 @@ class DicomImagesController < ApplicationController
   end
 
   def elements
+    id = params[:id]
+    tag = params[:tag]
+
+    dcm_image = DicomImage.load(id)
+    render json: dcm_image.element_for_tag(tag), status: :ok
   end
 
   private

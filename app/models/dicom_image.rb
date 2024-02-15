@@ -51,4 +51,8 @@ class DicomImage
     # dcm.image.normalize.write(png_filename)
     png_filename
   end
+
+  def element_for_tag(tag)
+    dcm[tag].to_json
+  end
 end
