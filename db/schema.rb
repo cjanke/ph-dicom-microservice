@@ -10,22 +10,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_02_14_195055) do
-
-  create_table "dicom_elements", force: :cascade do |t|
-    t.string "tag"
-    t.string "vr"
-    t.string "value"
-    t.integer "length"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "dicom_images", force: :cascade do |t|
-    t.binary "raw"
-    t.string "filename"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
+ActiveRecord::Schema.define(version: 0) do
 
 end
