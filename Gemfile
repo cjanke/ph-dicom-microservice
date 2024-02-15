@@ -40,3 +40,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'dicom', '~> 0.9.8'
+
+gem 'rmagick'
