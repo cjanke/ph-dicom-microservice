@@ -7,9 +7,6 @@ class DicomImagesController < ApplicationController
     render json: dicom_image, status: :created
   end
 
-  def show
-  end
-
   def png
     id = params[:id]
     dcm_image = DicomImage.load(id)
