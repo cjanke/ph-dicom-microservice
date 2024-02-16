@@ -1,16 +1,21 @@
 # README
 
+~~I ran into issues with the library for converting the file into a PNG for browser-based viewing and ran out of time to debug, but it accepts the requests.~~
+
+Update: works now!
+
 Simple microservice that is able to:
 - accept and store an uploaded DICOM file
 - extract and return any DICOM header attribute based on a DICOM Tag as a query parameter
-
-I ran into issues with the library for converting the file into a PNG for browser-based viewing and ran out of time to debug, but it accepts the requests.
+- convert the file into a PNG for browser-based viewing
 
 Minor notes for reviewers:
 - I tried to chunk the commits decently / indicate what was most relevant.
 - Most of the relevant files are in `app/models`.
 
 # Usage
+
+## Set up
 
 **Pre-requisite**: Need to be able to run Ruby / Rails programs.
 
@@ -24,13 +29,15 @@ From there, you can make requests to localhost using curl / preferred api testin
 
 ## Requests supported
 
-### POST /dicom_images
+### POST /api/VERSION/dicom_images
 
 Takes in a filename + a DICOM file via form-data and stores it locally.
 
 Example inputs in Apidog:
 
-![](documentation/apidog-image-post.png)
+<!-- ![](documentation/apidog-image-post.png) -->
+
+<img src="documentation/apidog-image-post.png" width="850"/>
 
 Curl version:
 
@@ -62,7 +69,7 @@ Example response:
 }
 ```
 
-### GET /api/<version>/dicom_images/:id/dicom_elements/?tag=XXXX,XXXX
+### GET /api/VERSION/dicom_images/:id/dicom_elements/?tag=XXXX,XXXX
 
 Given an id for a DicomImage (returned upon creation of an image) and a tag, returns element corresponding to tag.
 
@@ -78,24 +85,35 @@ Example response:
 }
 ```
 
-### GET api/<version>/dicom_images/:id/png
+### GET api/VERSION/dicom_images/:id/png
 
-Currently not functional, but intention is that given an id for a DicomImage, returns a png file (format defaulting to `application/octet-stream`).
+~~Currently not functional, but~~
+
+Update: works now!
+
+<!-- ![](documentation/apidog-png-happy-get.png) -->
+
+<img src="documentation/apidog-png-happy-get.png" width="850"/>
+
+Given an id for a DicomImage, returns a png file (format defaulting to `application/octet-stream`).
 
 Example request:
 
 `GET http://localhost:3000/api/v1/dicom_images/7/png`
 
-Currently returns "WIP - investigating issue with library and RMagick" but would normally download the file directly. In testing I was able to send the DicomImage back, skipping the PNG processing.
 
 # Suggested future changes
 
-## Would have definitely done this if I hadn't run out of time:
+## First priorities
 
 - More thorough input validation
 - Error codes / handling for if it's not valid Dicom, if the system was unable to store the file, etc.
-- More unit tests
-- ~~Versioning~~ Complete
+- More unit tests (Update: added another simple one)
+- ~~Versioning~~ (Update: complete)
+- Clean up `storage` directories upon closing Rails server. For example, this is my editor right now:
+
+<!-- ![alt text](documentation/vscode-messy-files.png) -->
+<img src="documentation/vscode-messy-files.png" width="300"/>
 
 ## Somewhat outside the scope of the assignment:
 
