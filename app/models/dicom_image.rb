@@ -15,6 +15,9 @@ class DicomImage
     else
       @id = id
     end
+
+    # Maybe future: add png filename to DicomImageToFilename records
+    # @generated_png_filename = nil
   end
 
   def set_content_from_file
@@ -27,6 +30,10 @@ class DicomImage
     self
   end
 
+  def save_locally
+    dcm.write(local_filename)
+  end
+
   def self.load(id)
     filename_mapping = DicomImageToFilename.find(id)
     dcmi = self.new(
@@ -37,21 +44,27 @@ class DicomImage
     dcmi.set_content_from_file
   end
 
-  def save_locally
-    dcm.write(local_filename)
-  end
-
-  def local_filename
-    IMAGE_DIRECTORY + "/#{id}-#{filename}"
-  end
-
   def png
     png_filename = local_filename + ".png"
-    dcm.image.normalize.write(png_filename)
+
+    if @generated_png_filename.nil?
+      generate_png(png_filename)
+      @generated_png_filename = png_filename
+    end
+
     png_filename
+  end
+
+  def generate_png(png_filename)
+    Rails.logger.info("DICOM: Saving PNG version of DICOM file to: #{png_filename}")
+    dcm.image.normalize.write(png_filename)
   end
 
   def element_for_tag(tag)
     dcm[tag].to_json
+  end
+
+  def local_filename
+    IMAGE_DIRECTORY + "/#{id}-#{filename}"
   end
 end

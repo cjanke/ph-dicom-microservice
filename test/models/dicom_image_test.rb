@@ -17,6 +17,10 @@ class DicomImageTest < ActiveSupport::TestCase
     assert File.file?(png_filename)
   end
 
+  test ".png only writes the png file once" do
+    "TODO - but you can verify manually by checking the logs and seeing the 'Saving PNG' message once"
+  end
+
   test ".load" do
     "TODO because I haven't reviewed docs on setting up mocking in Ruby / minitest recently"
   end
