@@ -47,8 +47,7 @@ class DicomImage
 
   def png
     png_filename = local_filename + ".png"
-    # TODO: some issue with the Ruby Dicom library and rmagick
-    # dcm.image.normalize.write(png_filename)
+    dcm.image.normalize.write(png_filename)
     png_filename
   end
 
