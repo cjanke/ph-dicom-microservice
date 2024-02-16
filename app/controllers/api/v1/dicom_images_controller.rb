@@ -11,9 +11,7 @@ module Api::V1
     def png
       id = params[:id]
       dcm_image = DicomImage.load(id)
-      # TODO: Fix in dicom_image so can enable here
-      # send_file dcm_image.png
-      render plain: "WIP - investigating issue with library and RMagick", status: :ok
+      send_file dcm_image.png
     end
 
     def elements
