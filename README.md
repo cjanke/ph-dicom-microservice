@@ -35,12 +35,12 @@ Example inputs in Apidog:
 Curl version:
 
 ```
-curl --location --request POST 'http://localhost:3000/dicom_images' \
+curl --location --request POST 'http://localhost:3000/api/v1/dicom_images' \
 --header 'User-Agent: Apidog/1.0.0 (https://apidog.com)' \
 --header 'Accept: */*' \
 --header 'Host: localhost:3000' \
 --header 'Connection: keep-alive' \
---header 'Content-Type: multipart/form-data; boundary=--------------------------720767563339980335052083' \
+--header 'Content-Type: multipart/form-data; boundary=--------------------------519424285481715771289683' \
 --form 'filename="IM000001"' \
 --form 'raw=@"/Users/clairejanke/Downloads/IM000001"'
 ```
@@ -62,13 +62,13 @@ Example response:
 }
 ```
 
-### GET /dicom_images/:id/dicom_elements/?tag=XXXX,XXXX
+### GET /api/<version>/dicom_images/:id/dicom_elements/?tag=XXXX,XXXX
 
 Given an id for a DicomImage (returned upon creation of an image) and a tag, returns element corresponding to tag.
 
 Example request:
 
-`GET http://localhost:3000/dicom_images/8/dicom_elements/?tag=0029,0010`
+`GET http://localhost:3000/api/v1/dicom_images/8/dicom_elements/?tag=0029,0010`
 
 Example response:
 
@@ -78,13 +78,13 @@ Example response:
 }
 ```
 
-### GET /dicom_images/:id/png
+### GET api/<version>/dicom_images/:id/png
 
 Currently not functional, but intention is that given an id for a DicomImage, returns a png file (format defaulting to `application/octet-stream`).
 
 Example request:
 
-`GET http://localhost:3000/dicom_images/7/png`
+`GET http://localhost:3000/api/v1/dicom_images/7/png`
 
 Currently returns "WIP - investigating issue with library and RMagick" but would normally download the file directly. In testing I was able to send the DicomImage back, skipping the PNG processing.
 
@@ -95,7 +95,7 @@ Currently returns "WIP - investigating issue with library and RMagick" but would
 - More thorough input validation
 - Error codes / handling for if it's not valid Dicom, if the system was unable to store the file, etc.
 - More unit tests
-- Versioning
+- ~~Versioning~~ Complete
 
 ## Somewhat outside the scope of the assignment:
 
